@@ -9,17 +9,26 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
   }
   
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text};
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+  body
+{
+  margin: 0
+  padding: 0
+  font - family
+  : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  ;-webkit - font - smoothing
+  : antialiased
+  ;-moz - osx - font - smoothing
+  : grayscale
+  background - color
+  : $
+  ;({ theme }) => theme.colors.background
+  color: $
+  ;({ theme }) => theme.colors.text
+  transition: background - color
+  0.3s ease, color 0.3s ease
+}
+
   
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;

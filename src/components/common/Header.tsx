@@ -49,17 +49,38 @@ const NavItem = styled.div`
   margin-left: 1.5rem;
 `
 
-const NavLink = styled.a<{ active?: boolean }>`
+const NavLink = styled.a<{ active?: boolean; hasDropdown?: boolean }>`
   color: ${({ theme, active }) => (active ? theme.colors.primary : theme.colors.text)};
   text-decoration: none;
   font-weight: 500;
   padding: 0.5rem 0;
   transition: all 0.3s ease;
-  display: block;
+  display: flex;
+  align-items: center;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
+  
+  ${({ hasDropdown }) =>
+    hasDropdown &&
+    `
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 0.5rem;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover::after {
+      transform: rotate(180deg);
+    }
+  `}
 `
 
 const Dropdown = styled.ul<{ isOpen: boolean }>`
@@ -298,7 +319,7 @@ const Header = () => {
             onMouseEnter={() => toggleDropdown("about")}
             onMouseLeave={() => toggleDropdown("about")}
           >
-            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/about-us")}>
+            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/about-us")} hasDropdown={true}>
               About Us
             </NavLink>
             <Dropdown isOpen={!!openDropdowns["about"]}>
@@ -336,7 +357,12 @@ const Header = () => {
             onMouseEnter={() => toggleDropdown("consumers")}
             onMouseLeave={() => toggleDropdown("consumers")}
           >
-            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/for-consumers")}>
+            <NavLink
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              active={isActive("/for-consumers")}
+              hasDropdown={true}
+            >
               For Consumers
             </NavLink>
             <Dropdown isOpen={!!openDropdowns["consumers"]}>
@@ -374,7 +400,7 @@ const Header = () => {
             onMouseEnter={() => toggleDropdown("business")}
             onMouseLeave={() => toggleDropdown("business")}
           >
-            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/for-business")}>
+            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/for-business")} hasDropdown={true}>
               For Business
             </NavLink>
             <Dropdown isOpen={!!openDropdowns["business"]}>
@@ -412,7 +438,7 @@ const Header = () => {
             onMouseEnter={() => toggleDropdown("partners")}
             onMouseLeave={() => toggleDropdown("partners")}
           >
-            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/partners")}>
+            <NavLink href="#" onClick={(e) => e.preventDefault()} active={isActive("/partners")} hasDropdown={true}>
               Partners
             </NavLink>
             <Dropdown isOpen={!!openDropdowns["partners"]}>
