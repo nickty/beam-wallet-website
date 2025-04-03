@@ -6,6 +6,10 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import Image from "next/image"
 
+interface HeaderProps {
+  navigation: any
+}
+
 const HeaderContainer = styled.header`
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
@@ -253,7 +257,7 @@ const MobileActionButton = styled.a`
   }
 `
 
-const Header = () => {
+const Header = ({ navigation }: HeaderProps) => {
   const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdowns, setOpenDropdowns] = useState<{ [key: string]: boolean }>({})
@@ -300,6 +304,8 @@ const Header = () => {
   const isActive = (path: string) => {
     return router.pathname === path || router.pathname.startsWith(`${path}/`)
   }
+
+  const menuItems = navigation?.attributes?.items || []
 
   return (
     <HeaderContainer>
